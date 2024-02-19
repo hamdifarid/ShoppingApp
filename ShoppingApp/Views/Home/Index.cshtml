@@ -10,6 +10,11 @@
         {
             <div class="column">
                 <div class="card">
+                    <div>
+                        <form method="post" action="/Home/DeleteProduct">
+                            <button style="border:none;color:red; float:right" type="submit" name="productId" value="@product.productId">Delete</button>
+                        </form>
+                    </div>
                     <h2>@product.productName</h2>
                     <!--insert a -->
                     <hr />

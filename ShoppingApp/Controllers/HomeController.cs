@@ -35,6 +35,15 @@ namespace ShoppingApp.Controllers
         }
 
         [HttpPost]
+        public async Task<ActionResult> DeleteProduct(int productId)
+        {
+            Product product = await db.Products.FindAsync(productId);
+            db.Products.Remove(product);
+            await db.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
         public async Task<ActionResult> AddProduct(Product product)
         {
             string productName = product.productName;
