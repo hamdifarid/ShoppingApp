@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -31,13 +32,13 @@ namespace ShoppingApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddProduct(Product product)
+        public async Task<ActionResult> AddProduct(Product product)
         {
             string productName = product.productName;
             string productDescription = product.productDescription;
             double productPrice = product.productPrice;
             db.Products.Add(new Product { productName = productName, productDescription = productDescription, productPrice = productPrice });
-            db.SaveChanges();
+            await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
     }
