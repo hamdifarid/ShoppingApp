@@ -1,7 +1,9 @@
 ﻿using ShoppingApp.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -11,9 +13,10 @@ namespace ShoppingApp.Controllers
     public class HomeController : Controller
     {
         private ProductContext db = new ProductContext();
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            List<Product> products = db.Products.ToList();
+            List<Product> products = await db.Products.ToListAsync();
+
             return View(products);
         }
 
