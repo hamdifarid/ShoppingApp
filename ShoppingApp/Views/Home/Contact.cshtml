@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "Contact";
+}
+<main aria-labelledby="title">
+    <div>
+        <form action="/Home/AddProduct" method="post">
+            <div class="row">
+                <div>
+                    <label for="pname">Product Name</label>
+                </div>
+                <div>
+                    <input type="text" id="pname" name="productname" placeholder="Chocolates...">
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    <label for="pdescr">Product Description</label>
+                </div>
+                <div>
+                    <input type="text" id="pdescr" name="productdescription" placeholder="Chocolates release dopamine..">
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    <label for="pprice">Product Price</label>
+                </div>
+                <div>
+                    <input type="number" id="pprice" name="productprice" placeholder="15..">
+                </div>
+            </div>
+            <div class="row">
+                <div style="padding:1%">
+                    <input type="submit" value="Submit">
+                </div>
+            </div>
+        </form>
+    </div>
+
+    @*<h2 id="title">@ViewBag.Title.</h2>
+        <h3>@ViewBag.Message</h3>
+
+        <address>
+            One Microsoft Way<br />
+            Redmond, WA 98052-6399<br />
+            <abbr title="Phone">P:</abbr>
+            425.555.0100
+        </address>
+
+        <address>
+            <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
+            <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
+        </address>*@
+</main>
