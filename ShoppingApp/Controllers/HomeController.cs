@@ -45,10 +45,10 @@ namespace ShoppingApp.Controllers
         [HttpPost]
         public async Task<ActionResult> AddProduct(Product product)
         {
-            string productName = product.productName;
-            string productDescription = product.productDescription;
-            double productPrice = product.productPrice;
-            db.Products.Add(new Product { productName = productName, productDescription = productDescription, productPrice = productPrice });
+            string productName = product.ProductName;
+            string productDescription = product.ProductDescription;
+            double productPrice = product.ProductPrice;
+            db.Products.Add(new Product { ProductName = productName, ProductDescription = productDescription, ProductPrice = productPrice });
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

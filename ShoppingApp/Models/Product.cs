@@ -7,9 +7,9 @@ namespace ShoppingApp.Models
 {
     public class Product
     {
-        public int productId { get; set; }
-        public string productName { get; set; }
-        public string productDescription { get; set; }
-        public double productPrice { get; set; }
+        public int ProductId { get; set; }
+        public string ProductName { get; set; }
+        public string ProductDescription { get; set; }
+        public double ProductPrice { get; set; }
     }
 }
