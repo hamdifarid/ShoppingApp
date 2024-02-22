@@ -19,10 +19,13 @@
                     <!--insert a -->
                     <hr />
                     <p>@product.productDescription</p>
-                    <p class="price">@product.productPrice $</p>
+                    <p class="price">@product.productPrice ₹</p>
                     <div style="flex-direction:row">
                         <button class="buyButton">Buy</button>
-                        <button class="addToCartButton">Add To Cart</button>
+                        <form method="post" action="/Home/AddToCart">
+                            <input type="hidden" name="productId" value="@product.productId" />
+                            <button type="submit" class="addToCartButton">Add To Cart</button>
+                        </form>
                     </div>
                 </div>
             </div>

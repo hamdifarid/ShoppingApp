@@ -52,5 +52,27 @@ namespace ShoppingApp.Controllers
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public async Task<ActionResult> AddToCart(int productId)
+        {
+            // Retrieve the product from the database
+            Product product = await db.Products.FindAsync(productId);
+
+            if (product != null)
+            {
+                // Add product to the shopping cart
+                // Here you can implement your logic to add the product to the shopping cart
+                // You might use session, database, or any other storage mechanism to manage the cart
+                // For demonstration purposes, I'll simply redirect to the "AddToCart" view
+                return View("AddToCart");
+            }
+            else
+            {
+                TempData["Message"] = "Product not found";
+                return RedirectToAction("Index");
+            }
+        }
+
     }
 }
