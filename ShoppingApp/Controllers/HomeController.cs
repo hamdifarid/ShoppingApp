@@ -18,7 +18,7 @@ namespace ShoppingApp.Controllers
         {
             List<Product> products = await db.Products.ToListAsync();
 
-            return View(products);
+            return View("Index",products);
         }
 
         public ActionResult About()
