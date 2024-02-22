@@ -1,8 +1,39 @@
-﻿@{
-    ViewBag.Title = "Add To Cart";
+﻿@model List<ShoppingApp.DTO.CartDTO>
+@{
+    ViewBag.Title = "Cart";
 }
 
-<h2>Add To Cart</h2>
+<h2>Cart</h2>
+<table width="100%">
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Quantity</th>
+            <th>Product Price</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cart in Model)
+        {
+            <tr>
+                <td>@cart.ProductName</td>
+                <td>@cart.Quantity</td>
+                <td>@cart.ProductPrice</td>
+                <td>@cart.Price $</td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+
+<div>
+    <h2>
+        Total:  <span style="padding-left:80%"> @Model.Sum(x => x.Price) $</span>
+    </h2>
+</div>
+
+
 
 <div>
     <p>Product added to cart successfully!</p>

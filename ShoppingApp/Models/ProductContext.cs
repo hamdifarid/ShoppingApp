@@ -12,5 +12,6 @@ namespace ShoppingApp.Models
         {
         }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Carts> Carts { get; set; }
     }
 }
