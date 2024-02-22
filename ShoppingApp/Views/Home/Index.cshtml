@@ -12,18 +12,18 @@
                 <div class="card">
                     <div>
                         <form method="post" action="/Home/DeleteProduct">
-                            <button style="border:none;color:red; float:right" type="submit" name="productId" value="@product.productId">Delete</button>
+                            <button style="border:none;color:red; float:right" type="submit" name="productId" value="@product.ProductId">Delete</button>
                         </form>
                     </div>
-                    <h2>@product.productName</h2>
+                    <h2>@product.ProductName</h2>
                     <!--insert a -->
                     <hr />
-                    <p>@product.productDescription</p>
-                    <p class="price">@product.productPrice ₹</p>
+                    <p>@product.ProductDescription</p>
+                    <p class="price">@product.ProductPrice ₹</p>
                     <form method="post" action="/Home/AddToCart">
                         <div style="flex-direction:row">
                             <button class="buyButton">Buy</button>
-                            <input type="hidden" name="productId" value="@product.productId" />
+                            <input type="hidden" name="productId" value="@product.ProductId" />
                             <button type="submit" class="addToCartButton">Add To Cart</button>
                         </div>
                     </form>

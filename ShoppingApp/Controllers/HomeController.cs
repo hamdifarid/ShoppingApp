@@ -1,4 +1,5 @@
-﻿using ShoppingApp.Models;
+﻿using ShoppingApp.DTO;
+using ShoppingApp.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -33,6 +34,15 @@ namespace ShoppingApp.Controllers
             return View();
         }
 
+        public async Task<ActionResult> CartPage()
+        {
+            //    List<int> productId = await db.Carts.Where(c=> c.UserId ==1).Select(c=>c.ProductId).ToListAsync();
+            //    List<Product> products = await db.Products.Where(p => productId.Contains(p.ProductId)).ToListAsync();
+            //run custom sql query
+            List<CartDTO> userProducts = await db.Database.SqlQuery<CartDTO>("select ProductName,ProductPrice,Quantity,(ProductPrice*Quantity) as Price from Products as p join Carts as c on p.ProductId = c.ProductId where UserId=1; ").ToListAsync();
+            return View("AddToCart", userProducts);
+        }
+
         [HttpPost]
         public async Task<ActionResult> DeleteProduct(int productId)
         {
@@ -45,10 +55,10 @@ namespace ShoppingApp.Controllers
         [HttpPost]
         public async Task<ActionResult> AddProduct(Product product)
         {
-            string productName = product.productName;
-            string productDescription = product.productDescription;
-            double productPrice = product.productPrice;
-            db.Products.Add(new Product { productName = productName, productDescription = productDescription, productPrice = productPrice });
+            string productName = product.ProductName;
+            string productDescription = product.ProductDescription;
+            double productPrice = product.ProductPrice;
+            db.Products.Add(new Product { ProductName = productName, ProductDescription = productDescription, ProductPrice = productPrice });
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
@@ -56,21 +66,35 @@ namespace ShoppingApp.Controllers
         [HttpPost]
         public async Task<ActionResult> AddToCart(int productId)
         {
-            // Retrieve the product from the database
-            Product product = await db.Products.FindAsync(productId);
 
-            if (product != null)
+            int productQuantity = await GetQuantityOfProduct(productId, 1);
+            if (productQuantity > 0)
             {
-                // Add product to the shopping cart
-                // Here you can implement your logic to add the product to the shopping cart
-                // You might use session, database, or any other storage mechanism to manage the cart
-                // For demonstration purposes, I'll simply redirect to the "AddToCart" view
-                return View("AddToCart");
+                Carts cart = await db.Carts.FirstOrDefaultAsync(c => c.ProductId == productId && c.UserId == 1);
+                cart.Quantity = productQuantity + 1;
+                await db.SaveChangesAsync();
+                return RedirectToAction("CartPage");
             }
             else
             {
-                TempData["Message"] = "Product not found";
-                return RedirectToAction("Index");
+                Carts cart = db.Carts.Add(new Carts { ProductId = productId, Quantity = productQuantity + 1, UserId = 1 });
+                await db.SaveChangesAsync();
+                return RedirectToAction("CartPage");
+            }
+
+
+        }
+
+        public async Task<int> GetQuantityOfProduct(int productId, int userId)
+        {
+            Carts cart = await db.Carts.FirstOrDefaultAsync(c => c.ProductId == productId && c.UserId == userId);
+            if (cart != null)
+            {
+                return cart.Quantity;
+            }
+            else
+            {
+                return 0;
             }
         }
 
