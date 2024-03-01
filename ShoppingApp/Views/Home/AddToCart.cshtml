@@ -3,6 +3,120 @@
     ViewBag.Title = "Cart";
 }
 
+
+<head>
+    <title>@ViewBag.Title</title>
+    <style>
+        body {
+            background-color: #272727; /* subtle black background */
+            color: #d1e8e2; /* Light text for contrast */
+            font-family: Arial, sans-serif;
+        }
+
+        h2 {
+            color: #d1e8e2; /* Darker yellow for headings */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+            border-bottom: 1px solid #ddd; /* Light grey border for table rows */
+        }
+
+        th {
+            background-color: #d1e8e2; /* Yellow background for table headers */
+            color: #272727;
+        }
+
+        tr:hover {
+            background-color: #4e4e50; /* Light grey background on row hover */
+        }
+
+        button {
+            background-color: #6f2232; /* Red background for buttons */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        a {
+            color: #f9d342; /* Yellow color for links */
+            text-decoration: none;
+        }
+
+            a:hover {
+                text-decoration: underline;
+            }
+    </style>
+</head>
+<body>
+
+    <h2>Cart</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Product Price</th>
+                <th>Price</th>
+                <th></th> <!-- New column for remove button -->
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var cart in Model)
+            {
+                <tr>
+                    <td>@cart.ProductName</td>
+                    <td>@cart.Quantity</td>
+                    <td>@cart.ProductPrice</td>
+                    <td>@cart.Price ₹</td>
+                    <td>
+                        <!-- Form for remove button -->
+                        <form method="post" action="/Home/RemoveFromCart">
+                            <input type="hidden" name="productId" value="@cart.ProductId" />
+                            <button type="submit">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div>
+        <h2>
+            Total: <span style="padding-left:80%"> @Model.Sum(x => x.Price) ₹</span>
+        </h2>
+    </div>
+
+    <div>
+        <p>Product added to cart successfully!</p>
+        <p>What would you like to do next?</p>
+        <p><a href="@Url.Action("Index", "Home")">Continue Shopping</a></p>
+    </div>
+
+</body>
+
+
+
+
+
+
+@*@{
+    ViewBag.Title = "Cart";
+}
+
 <h2>Cart</h2>
 <table width="100%">
     <thead>
@@ -11,33 +125,31 @@
             <th>Quantity</th>
             <th>Product Price</th>
             <th>Price</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var cart in Model)
-        {
-            <tr>
-                <td>@cart.ProductName</td>
-                <td>@cart.Quantity</td>
-                <td>@cart.ProductPrice</td>
-                <td>@cart.Price $</td>
+            <th></th>-->*@
+ <!-- New column for remove button -->
+<!--</tr>
+</thead>
+<tbody>
+
+<!-- Form for remove button -->
+<!--<form method="post" action="/Home/RemoveFromCart">
+                        <input type="hidden" name="productId" value="" />
+                        <button type="submit">Remove</button>
+                    </form>
+                </td>
             </tr>
         }
-    </tbody>
-
+ </tbody>
 </table>
 
 <div>
     <h2>
-        Total:  <span style="padding-left:80%"> @Model.Sum(x => x.Price) $</span>
+        Total: <span style="padding-left:80%"> @Model.Sum(x => x.Price) $</span>
     </h2>
 </div>
-
-
 
 <div>
     <p>Product added to cart successfully!</p>
     <p>What would you like to do next?</p>
     <p><a href="@Url.Action("Index", "Home")">Continue Shopping</a></p>
-    <p><a href="@Url.Action("ViewCart", "Cart")">View Cart</a></p>
-</div>
+</div>-->

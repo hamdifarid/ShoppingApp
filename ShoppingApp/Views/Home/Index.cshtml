@@ -14,6 +14,9 @@
                         <form method="post" action="/Home/DeleteProduct">
                             <button style="border:none;color:red; float:right" type="submit" name="productId" value="@product.ProductId">Delete</button>
                         </form>
+                        <form method="post" action="/Home/EditProduct">
+                            <button style="border:none;color:red; float:right" type="submit" name="productId" value="@product.ProductId">Edit</button>
+                        </form>
                     </div>
                     <h2>@product.ProductName</h2>
                     <!--insert a -->
