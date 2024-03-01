@@ -12,18 +12,25 @@
                 <div class="card">
                     <div>
                         <form method="post" action="/Home/DeleteProduct">
-                            <button style="border:none;color:red; float:right" type="submit" name="ProductId" value="@product.ProductId">Delete</button>
+                            <button style="border:none;color:red; float:right" type="submit" name="productId" value="@product.ProductId">Delete</button>
+                        </form>
+                        <form method="post" action="/Home/EditProduct">
+                            <button style="border:none;color:red; float:right" type="submit" name="productId" value="@product.ProductId">Edit</button>
                         </form>
                     </div>
                     <h2>@product.ProductName</h2>
                     <!--insert a -->
                     <hr />
                     <p>@product.ProductDescription</p>
-                    <p class="price">@product.ProductPrice $</p>
-                    <div style="flex-direction:row">
-                        <button class="buyButton">Buy</button>
-                        <button class="addToCartButton">Add To Cart</button>
-                    </div>
+
+                    <p class="price">@product.ProductPrice ₹</p>
+                    <form method="post" action="/Home/AddToCart">
+                        <div style="flex-direction:row">
+                            <button class="buyButton">Buy</button>
+                            <input type="hidden" name="productId" value="@product.ProductId" />
+                            <button type="submit" class="addToCartButton">Add To Cart</button>
+                        </div>
+                    </form>
                 </div>
             </div>
 
